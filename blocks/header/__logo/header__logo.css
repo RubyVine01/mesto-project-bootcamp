@@ -1,12 +1,26 @@
 .header__logo {
-    background-image: url(../.././../images/logo.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 142px;
-    height: 33px;
-    text-decoration: none;
+  background-image: url(../.././../images/logo.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 142px;
+  height: 33px;
+  text-decoration: none;
 }
 
 .header__logo:hover {
-    opacity: 0.8;
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 960px) {
+  .header__logo {
+    margin-left: 24px;
   }
+}
+
+@media screen and (max-width: 500px) {
+  .header__logo {
+    margin-left: 24px;
+    width: 104px;
+    height: 24.4px;
+  }
+}

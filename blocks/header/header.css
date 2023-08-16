@@ -1,9 +1,16 @@
-.header{
-    margin: 0 auto;
-    max-width: 880px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 41px;
-    align-items: start;
-    padding-top: 45px;
+.header {
+  margin: 0 auto;
+  max-width: 880px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 41px;
+  align-items: start;
+  padding-top: 45px;
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    row-gap: 31.6px;
+    padding-top: 28px;
+  }
 }
