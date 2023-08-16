@@ -1,0 +1,15 @@
+.profile__about-author {
+  color: #fff;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  grid-column-start: 1; 
+  grid-column-end: 3; 
+  grid-row-start: 2; 
+  grid-row-end: 3;
+}
