@@ -12,9 +12,13 @@
 @import url(../blocks/profile/__about-author/profile__about-author.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
-
-
-
-
+@import url(../blocks/photo-place/photo-place.css);
+@import url(../blocks/photo-place/__list/photo-place__list.css);
+@import url(../blocks/photo-place/__item/photo-place__item.css);
+@import url(../blocks/photo-place/__item-photo/photo-place__item-photo.css);
+@import url(../blocks/photo-place/__item-action-title/photo-place__item-action-title.css);
+@import url(../blocks/photo-place/__item-discription/photo-place__item-discription.css);
+@import url(../blocks/photo-place/__item-like/photo-place__item-like.css);
+@import url(../blocks/photo-place/__item-like/_active/photo-place__item-like_active.css);
 
 @import url(../blocks/footer/footer.css);

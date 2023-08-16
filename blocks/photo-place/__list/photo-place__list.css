@@ -1,0 +1,10 @@
+.photo-place__list {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 282px);
+  column-gap: 17px;
+  justify-content: center;
+  row-gap: 20px;
+  list-style: none;
+  padding-left: 0;
+}
