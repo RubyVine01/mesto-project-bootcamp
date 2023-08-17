@@ -1,5 +1,13 @@
 .photo-place {
   margin: 0 auto;
   padding-top: 51px;
-  max-width: 880px;
+  max-width: 900px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@media screen and (max-width: 625px) {
+  .photo-place {
+    padding-top: 36px;
+  }
 }

@@ -8,6 +8,19 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 550px;
+  max-width: 500px;
+}
 
+@media screen and (max-width: 750px) {
+  .profile__author-name {
+    font-size: 35px;
+    max-width: 370px;
+  }
+}
+
+@media screen and (max-width: 625px) {
+  .profile__author-name {
+    font-size: 27px;
+    max-width: 254px;
+  }
 }
