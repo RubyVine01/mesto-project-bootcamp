@@ -11,6 +11,7 @@
   border: none;
   outline: none;
   padding: 0;
+  cursor: pointer;
 }
 
 .profile__edit-button:hover {
