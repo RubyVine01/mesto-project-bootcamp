@@ -3,8 +3,8 @@
   display: grid;
   grid-template-columns: 1fr 24px;
   column-gap: 18px;
-  row-gap: 16px;
-  align-items: center;
+  row-gap: 8px;
+  align-items: baseline;
 }
 
 @media screen and (max-width: 750px) {
@@ -18,7 +18,7 @@
   .profile__info {
     grid-template-columns: 1fr 18px;
     column-gap: 10px;
-    row-gap: 14px;
+    row-gap: 8px;
     padding-top: 26px;
   }
 }

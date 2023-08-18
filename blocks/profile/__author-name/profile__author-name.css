@@ -21,6 +21,8 @@
 @media screen and (max-width: 625px) {
   .profile__author-name {
     font-size: 27px;
+    line-height: normal;
     max-width: 254px;
+    text-align: center;
   }
 }

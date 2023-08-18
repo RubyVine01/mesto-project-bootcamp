@@ -1,17 +1,26 @@
 # Проект: Место
 
+## GitHub Pages 
+https://rubyvine01.github.io/mesto-project-bootcamp/
+
 ### Обзор
+* Интро
+* Технологии
+* To do
 
-* Figma
-* Картинки
+## Интро
+Учебный проект создан для отработки изученных навыков HTML и CSS и изучения Java Script.
 
-**Figma**
+## Технологии
+- [HTML](https://html.com/)
+- [CSS](https://www.w3.org/TR/CSS/#css)
+    - [Flex](https://developer.mozilla.org/en-US/docs/Web/CSS/flex)
+    - [Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout)
+    - Адаптивная верстка
+- [БЭМ](https://ru.bem.info/)
+- Типографика
+- [Figma](https://www.figma.com/)
+- Диалоговые окна
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
-
-**Картинки**
-
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!
+## To do
+- [ ] Добавить интерактивность с помощью Java Script.
