@@ -13,6 +13,9 @@
   padding: 0;
   cursor: pointer;
   transition: 0.5s;
+  position: absolute;
+  right: -42px;
+  top: 15px;
 }
 
 .profile__edit-button:hover {
@@ -23,5 +26,7 @@
   .profile__edit-button {
     height: 18px;
     width: 18px;
+    right: -28px;
+    top: 33px;
   }
 }
