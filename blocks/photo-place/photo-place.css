@@ -4,8 +4,15 @@
   max-width: 918px;
 }
 
-@media screen and (max-width: 625px) {
+@media screen and (max-width: 932px) {
+  .photo-place {
+    max-width: 850px;
+  }
+}
+
+@media screen and (max-width: 635px) {
   .photo-place {
     padding-top: 36px;
+    max-width: 520px;
   }
 }

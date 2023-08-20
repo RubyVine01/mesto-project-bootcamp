@@ -17,6 +17,7 @@
   .profile__info {
     grid-template-columns: 1fr 18px;
     column-gap: 10px;
-    padding-top: 26px;
+    padding-top: 24px;
+    padding-left: 26px;
   }
 }
