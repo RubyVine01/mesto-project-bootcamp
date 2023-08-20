@@ -5,6 +5,8 @@
   width: 142px;
   height: 33px;
   text-decoration: none;
+  padding-bottom: 41px;
+  transition: 0.5s;
 }
 
 .header__logo:hover {

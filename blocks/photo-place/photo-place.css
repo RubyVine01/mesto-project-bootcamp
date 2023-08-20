@@ -1,9 +1,7 @@
 .photo-place {
   margin: 0 auto;
   padding-top: 51px;
-  max-width: 900px;
-  padding-left: 10px;
-  padding-right: 10px;
+  max-width: 918px;
 }
 
 @media screen and (max-width: 625px) {

@@ -6,6 +6,7 @@
   flex-direction: column;
   row-gap: 41px;
   align-items: start;
+  border-bottom: 1px solid #545454;
 }
 
 @media screen and (max-width: 500px) {

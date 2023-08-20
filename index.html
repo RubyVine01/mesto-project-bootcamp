@@ -13,25 +13,8 @@
   </head>
   <body class="root">
     <div class="page">
-      <div class="popup">
-        <!--popup_opened - класс для включения стилей видимости popup-->
-        <div class="popup__conteiner">
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <fieldset class="popup__input-conteiner">
-            <input type="text" class="popup__input-text" value="Жак-Ив Кусто" />
-            <input
-              type="text"
-              class="popup__input-text"
-              value="Исследователь океана"
-            />
-          </fieldset>
-          <button class="popup__button-close"></button>
-          <button class="popup__button-save">Сохранить</button>
-        </div>
-      </div>
       <header class="header">
         <a href="#" class="header__logo"></a>
-        <div class="header__line"></div>
       </header>
       <main class="content">
         <section class="profile">
@@ -42,87 +25,147 @@
           />
           <div class="profile__info">
             <h1 class="profile__author-name">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button"></button>
+            <button
+              type="button"
+              class="profile__edit-button"
+              aria-label="Редактировать профиль"
+            ></button>
             <p class="profile__about-author">Исследователь океана</p>
           </div>
-          <button class="profile__add-button"></button>
+          <button
+            type="button"
+            class="profile__add-button"
+            aria-label="загрузить новое изображение"
+          ></button>
         </section>
         <section class="photo-place">
           <ul class="photo-place__list">
-            <li class="photo-place__item">
+            <li class="photo-item">
               <img
                 src="./images/mountain-church.webp"
                 alt="Церковь в горах"
-                class="photo-place__item-photo"
+                class="photo-item__photo"
               />
-              <div class="photo-place__item-action-title">
-                <h2 class="photo-place__item-discription">Карачаевск</h2>
-                <div class="photo-place__item-like"></div>
+              <div class="photo-item__action-title">
+                <h2 class="photo-item__discription">Карачаевск</h2>
+                <button
+                  type="button"
+                  class="photo-item__like"
+                  aria-label="Поставить отметку нравиться"
+                ></button>
               </div>
             </li>
-            <li class="photo-place__item">
-              <img
-                src="./images/mountain-sunset.webp"
-                alt="Закат в горах"
-                class="photo-place__item-photo"
-              />
-              <div class="photo-place__item-action-title">
-                <h2 class="photo-place__item-discription">Гора Эльбрус</h2>
-                <div class="photo-place__item-like"></div>
-              </div>
-            </li>
-            <li class="photo-place__item">
-              <img
-                src="./images/rock-glacier.webp"
-                alt="Ледник в горах"
-                class="photo-place__item-photo"
-              />
-              <div class="photo-place__item-action-title">
-                <h2 class="photo-place__item-discription">Домбай</h2>
-                <div class="photo-place__item-like"></div>
-              </div>
-            </li>
-            <li class="photo-place__item">
-              <img
-                src="./images/mountain-sunset.webp"
-                alt="Закат в горах"
-                class="photo-place__item-photo"
-              />
-              <div class="photo-place__item-action-title">
-                <h2 class="photo-place__item-discription">Гора Эльбрус</h2>
-                <div class="photo-place__item-like"></div>
-              </div>
-            </li>
-            <li class="photo-place__item">
-              <img
-                src="./images/rock-glacier.webp"
-                alt="Ледник в горах"
-                class="photo-place__item-photo"
-              />
-              <div class="photo-place__item-action-title">
-                <h2 class="photo-place__item-discription">Домбай</h2>
-                <div class="photo-place__item-like"></div>
-              </div>
-            </li>
-            <li class="photo-place__item">
+            <li class="photo-item">
               <img
                 src="./images/mountain-church.webp"
                 alt="Церковь в горах"
-                class="photo-place__item-photo"
+                class="photo-item__photo"
               />
-              <div class="photo-place__item-action-title">
-                <h2 class="photo-place__item-discription">
-                  Карачаево-Черкесия
-                </h2>
-                <div class="photo-place__item-like"></div>
+              <div class="photo-item__action-title">
+                <h2 class="photo-item__discription">Карачаевск</h2>
+                <button
+                  type="button"
+                  class="photo-item__like"
+                  aria-label="Поставить отметку нравиться"
+                ></button>
+              </div>
+            </li>
+            <li class="photo-item">
+              <img
+                src="./images/mountain-church.webp"
+                alt="Церковь в горах"
+                class="photo-item__photo"
+              />
+              <div class="photo-item__action-title">
+                <h2 class="photo-item__discription">Карачаевск</h2>
+                <button
+                  type="button"
+                  class="photo-item__like"
+                  aria-label="Поставить отметку нравиться"
+                ></button>
+              </div>
+            </li>
+            <li class="photo-item">
+              <img
+                src="./images/mountain-church.webp"
+                alt="Церковь в горах"
+                class="photo-item__photo"
+              />
+              <div class="photo-item__action-title">
+                <h2 class="photo-item__discription">Карачаевск</h2>
+                <button
+                  type="button"
+                  class="photo-item__like"
+                  aria-label="Поставить отметку нравиться"
+                ></button>
+              </div>
+            </li>
+            <li class="photo-item">
+              <img
+                src="./images/mountain-church.webp"
+                alt="Церковь в горах"
+                class="photo-item__photo"
+              />
+              <div class="photo-item__action-title">
+                <h2 class="photo-item__discription">Карачаевск</h2>
+                <button
+                  type="button"
+                  class="photo-item__like"
+                  aria-label="Поставить отметку нравиться"
+                ></button>
+              </div>
+            </li>
+            <li class="photo-item">
+              <img
+                src="./images/mountain-church.webp"
+                alt="Церковь в горах"
+                class="photo-item__photo"
+              />
+              <div class="photo-item__action-title">
+                <h2 class="photo-item__discription">Карачаевск</h2>
+                <button
+                  type="button"
+                  class="photo-item__like"
+                  aria-label="Поставить отметку нравиться"
+                ></button>
               </div>
             </li>
           </ul>
         </section>
       </main>
       <footer class="footer">
-        <h2 class="footer__copyright">© 2020 Mesto Russia</h2>
+        <p class="footer__copyright">© 2020 Mesto Russia</p>
       </footer>
+      <div class="popup">
+        <!--popup_opened - класс для включения стилей видимости popup-->
+        <div class="popup__conteiner">
+          <button
+            type="button"
+            class="popup__button-close"
+            aria-label="Закрыть форму редактирования профиля"
+          ></button>
+          <form class="popup__form">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <fieldset class="popup__input-conteiner">
+              <input
+                type="text"
+                class="popup__input-text"
+                value="Жак-Ив Кусто"
+                placeholder="Имя Фамилия"
+                required
+              />
+              <input
+                type="text"
+                class="popup__input-text"
+                value="Исследователь океана"
+                placeholder="О себе"
+                required
+              />
+            </fieldset>
+            <button type="submit" class="popup__button-save">Сохранить</button>
+          </form>
+        </div>
+      </div>
     </div>
   </body>
 </html>

@@ -9,8 +9,9 @@
   background-repeat: no-repeat;
   border: none;
   padding: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
   cursor: pointer;
+  transition: 0.5s;
 }
 
 .popup__button-close:hover {

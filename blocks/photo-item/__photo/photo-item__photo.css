@@ -1,6 +1,6 @@
-.photo-place__item-photo {
-  width: 282px;
-  height: 282px;
+.photo-item__photo {
+  width: 100%;
+  min-height: 282px;
   object-fit: cover;
   display: block;
   border-radius: 10px 10px 0px 0px;

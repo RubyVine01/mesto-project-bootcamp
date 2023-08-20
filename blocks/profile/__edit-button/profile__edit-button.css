@@ -7,11 +7,12 @@
   background-repeat: no-repeat;
   display: inline-block;
   background-position: center;
-  background-color: #000;
+  background-color: transparent;
   border: none;
   outline: none;
   padding: 0;
   cursor: pointer;
+  transition: 0.5s;
 }
 
 .profile__edit-button:hover {
