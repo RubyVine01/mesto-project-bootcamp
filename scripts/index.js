@@ -1,8 +1,36 @@
+const initialCards = [
+  {
+    name: "Архыз",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+  },
+  {
+    name: "Челябинская область",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+  },
+  {
+    name: "Иваново",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+  },
+  {
+    name: "Камчатка",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+  },
+  {
+    name: "Холмогорский район",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+  },
+  {
+    name: "Байкал",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+  },
+];
+
+
 const editButton = document.querySelector(".profile__edit-button"); // кнопка редактирования профиля
 
-const authorName = document.querySelector(".profile__author-name"); // текстовый элемент с именем профиля 
+const authorName = document.querySelector(".profile__author-name"); // текстовый элемент с именем профиля
 
-const aboutAuthor = document.querySelector(".profile__about-author");// текстовый элемент с информацией "О себе"
+const aboutAuthor = document.querySelector(".profile__about-author"); // текстовый элемент с информацией "О себе"
 
 const popup = document.querySelector(".popup"); // popup
 
@@ -13,6 +41,8 @@ const formElement = popup.querySelector(".popup__form");
 const inputAuthorName = document.getElementById("input-name"); // поле ввода имени в форме редактирования профиля
 
 const inputAboutAuthor = document.getElementById("input-about-author"); // поле ввода информации о себе в форме редактирования профиля
+
+const cardContainer = document.querySelector('.photo-place__list') // список с фото-карточками
 
 
 // функция открытия popup
@@ -25,7 +55,7 @@ function closePopup() {
   popup.classList.remove("popup_opened");
 }
 
-//функция заполнения input.value в форме полученными значениями 
+//функция заполнения input.value в форме полученными значениями
 
 function fillInpytValue(inputName, content) {
   let contentValue = content.innerText; // получает текстовое значение
@@ -40,22 +70,35 @@ function handleFormSubmit(evt) {
   authorName.innerHTML = nameInputValue;
   aboutAuthor.innerHTML = jobInputValue;
 
-  closePopup()
+  closePopup();
 }
+
+// функция добавляет карточку с фотографией при вызове
+function addPhotoCard (imageName, imageLink) {
+  const photoCardTemplate = document.querySelector('#foto-card').content;
+  const photoCard= photoCardTemplate .querySelector('.photo-item').cloneNode(true);
+  photoCard.querySelector('.photo-item__discription').textContent = imageName;
+  photoCard.querySelector('.photo-item__photo').src = imageLink;
+  photoCard.querySelector('.photo-item__photo').alt = imageName;
+
+  cardContainer.append(photoCard);
+};
+
+
+
 
 
 editButton.addEventListener("click", openPopup); // вызов действия при клике на кнопку редактирования профиля
 
-closeButton.addEventListener("click", closePopup);// вызов действия при клике на кнопку закрытия popup, действует для всех popup
-
+closeButton.addEventListener("click", closePopup); // вызов действия при клике на кнопку закрытия popup, действует для всех popup
 
 fillInpytValue(inputAboutAuthor, aboutAuthor); // вызов функции для заполнения input.value в форме редактирования профиля пользователя для поля "О себе"
 
 fillInpytValue(inputAuthorName, authorName); // вызов функции для заполнения input.value в форме редактирования профиля пользователя для поля "О себе"
 
+formElement.addEventListener("submit", handleFormSubmit); //сохраняет значения введенные в форму редактирования профиля
 
-formElement.addEventListener("submit", handleFormSubmit);
-
-
-
-
+//перебирает значения в массиве и добавляет новые карточки
+for (let initialCard of initialCards) {
+  addPhotoCard(initialCard.name, initialCard.link )
+}
