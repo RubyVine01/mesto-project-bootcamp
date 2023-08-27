@@ -17,10 +17,13 @@ https://rubyvine01.github.io/mesto-project-bootcamp/
     - [Flex](https://developer.mozilla.org/en-US/docs/Web/CSS/flex)
     - [Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout)
     - Адаптивная верстка
+- Java Script
+- Git: работа с ветками
 - [БЭМ](https://ru.bem.info/)
 - Типографика
 - [Figma](https://www.figma.com/)
 - Диалоговые окна
 
 ## To do
-- [ ] Добавить интерактивность с помощью Java Script.
+- [ ] Добавить валидацию полей в формах с помощью Java Script.
+- [ ] Настроить работу с сервером.
