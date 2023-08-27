@@ -13,10 +13,12 @@
   </head>
   <body class="root">
     <div class="page">
+      <!--секция header-->
       <header class="header">
         <a href="#" class="header__logo"></a>
       </header>
       <main class="content">
+         <!--секция profile-->
         <section class="profile">
           <img
             src="./images/profile-avatar.webp"
@@ -38,108 +40,17 @@
             aria-label="загрузить новое изображение"
           ></button>
         </section>
+        <!--секция photo-place-->
         <section class="photo-place">
-          <ul class="photo-place__list">
-            <li class="photo-item">
-              <img
-                src="./images/mountain-church.webp"
-                alt="Церковь в горах"
-                class="photo-item__photo"
-              />
-              <div class="photo-item__action-title">
-                <h2 class="photo-item__discription">Карачаевск</h2>
-                <button
-                  type="button"
-                  class="photo-item__like"
-                  aria-label="Поставить отметку нравиться"
-                ></button>
-              </div>
-            </li>
-            <li class="photo-item">
-              <img
-                src="./images/mountain-sunset.webp"
-                alt="Закат в горах"
-                class="photo-item__photo"
-              />
-              <div class="photo-item__action-title">
-                <h2 class="photo-item__discription">Гора Эльбрус</h2>
-                <button
-                  type="button"
-                  class="photo-item__like"
-                  aria-label="Поставить отметку нравиться"
-                ></button>
-              </div>
-            </li>
-            <li class="photo-item">
-              <img
-                src="./images/rock-glacier.webp"
-                alt="Ледник в горах"
-                class="photo-item__photo"
-              />
-              <div class="photo-item__action-title">
-                <h2 class="photo-item__discription">Домбай</h2>
-                <button
-                  type="button"
-                  class="photo-item__like"
-                  aria-label="Поставить отметку нравиться"
-                ></button>
-              </div>
-            </li>
-            <li class="photo-item">
-              <img
-                src="./images/mountain-sunset.webp"
-                alt="Закат в горах"
-                class="photo-item__photo"
-              />
-              <div class="photo-item__action-title">
-                <h2 class="photo-item__discription">Гора Эльбрус</h2>
-                <button
-                  type="button"
-                  class="photo-item__like"
-                  aria-label="Поставить отметку нравиться"
-                ></button>
-              </div>
-            </li>
-            <li class="photo-item">
-              <img
-                src="./images/rock-glacier.webp"
-                alt="Ледник в горах"
-                class="photo-item__photo"
-              />
-              <div class="photo-item__action-title">
-                <h2 class="photo-item__discription">Домбай</h2>
-                <button
-                  type="button"
-                  class="photo-item__like"
-                  aria-label="Поставить отметку нравиться"
-                ></button>
-              </div>
-            </li>
-            <li class="photo-item">
-              <img
-                src="./images/mountain-church.webp"
-                alt="Церковь в горах"
-                class="photo-item__photo"
-              />
-              <div class="photo-item__action-title">
-                <h2 class="photo-item__discription">Карачаево-Черкесия</h2>
-                <button
-                  type="button"
-                  class="photo-item__like"
-                  aria-label="Поставить отметку нравиться"
-                ></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="photo-place__list"></ul>
         </section>
       </main>
+      <!--секция footer-->
       <footer class="footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
       </footer>
-
-
+      <!--popup - форма редактирования профиля-->
       <div class="popup" id="popup-edit-profile">
-        <!--popup_opened - класс для включения стилей видимости popup-->
         <div class="popup__conteiner">
           <button
             type="button"
@@ -168,10 +79,8 @@
           </form>
         </div>
       </div>
-
-
+      <!--popup - форма добавления фото-->
       <div class="popup" id="popup-add-photo">
-        <!--popup_opened - класс для включения стилей видимости popup-->
         <div class="popup__conteiner">
           <button
             type="button"
@@ -200,13 +109,29 @@
           </form>
         </div>
       </div>
+      <!--popup просмотра изображения-->
+      <div class="popup popup_view-photo" id="popup-view-photo">
+        <!--popup_opened - класс для включения стилей видимости popup-->
+        <div class="popup__photo-conteiner">
+          <img src="" class="popup__photo-image" />
+          <figcaption class="popup__photo-description"></figcaption>
+          <button
+            type="button"
+            class="popup__button-close"
+            aria-label="Закрыть форму редактирования профиля"
+          ></button>
+        </div>
+      </div>
     </div>
-
-
-    
+    <!--шаблон карточки-->
     <template id="photo-card">
       <li class="photo-item">
-        <img src="" alt="" class="photo-item__photo" />
+        <button
+          type="button"
+          class="photo-item__delete"
+          aria-label="Удалить фото"
+        ></button>
+        <img src="" class="photo-item__photo" />
         <div class="photo-item__action-title">
           <h2 class="photo-item__discription"></h2>
           <button

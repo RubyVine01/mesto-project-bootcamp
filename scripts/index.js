@@ -1,5 +1,6 @@
 // ПЕРЕМЕННЫЕ
 //
+
 const initialCards = [
   {
     name: "Архыз",
@@ -92,14 +93,53 @@ function handleProfileFormSubmit(evt) {
 
 // функция добавляет карточку с фотографией при вызове
 function addPhotoCard(imageName, imageLink) {
-  const photoCardTemplate = document.querySelector("#photo-card").content;
+  const photoCardTemplate = document.querySelector("#photo-card").content; //контент шаблона карточки
+
   const photoCard = photoCardTemplate
     .querySelector(".photo-item")
-    .cloneNode(true);
-  photoCard.querySelector(".photo-item__discription").textContent = imageName;
-  photoCard.querySelector(".photo-item__photo").src = imageLink;
+    .cloneNode(true); // карточкуа со всем содержимым
 
-  cardContainer.append(photoCard);
+  const photoLike = photoCard.querySelector(".photo-item__like"); // кнопка "нравитяся"
+
+  const photoDelete = photoCard.querySelector(".photo-item__delete"); // кнопка удалить
+
+  const popupViewPhoto = document.getElementById("popup-view-photo"); //попап просмотра фото
+
+  const closeButtonViewPhoto = popupViewPhoto.querySelector(
+    ".popup__button-close"
+  ); //кнопка закрытия попапа просмотра фото
+
+  const photoView = photoCard.querySelector(".photo-item__photo"); //изображение в карточке
+
+  photoCard.querySelector(".photo-item__discription").textContent = imageName; //присваивание заголовка карточке
+
+  photoCard.querySelector(".photo-item__photo").src = imageLink; //присваивание изображения карточке
+
+  //позволяет активировать и деактивировать кнопку "нравится"
+  photoLike.addEventListener("click", (evt) =>
+    evt.target.classList.toggle("photo-item__like-active")
+  );
+
+  //удаляет карточку с фото
+  photoDelete.addEventListener("click", () => photoCard.remove());
+
+  // открывает модальное окно просмотра фото
+  photoView.addEventListener("click", () => {
+    popupViewPhoto.querySelector(".popup__photo-image").src = imageLink; //присваивание изображения попапу просмотра
+    popupViewPhoto.querySelector(".popup__photo-description").textContent =
+      imageName; //присваивание подписи к изображению попапу просмотра
+
+    // открытие попапа просмотра изображения
+    openPopup(popupViewPhoto);
+  });
+
+  // закрывает модальное окно просмотра фото
+  closeButtonViewPhoto.addEventListener("click", () =>
+    closePopup(popupViewPhoto)
+  );
+
+  //создает карточку с фото
+  cardContainer.prepend(photoCard);
 }
 
 // Создание новой карточки через форму добавления фото
@@ -116,21 +156,15 @@ function handlePhotoFormSubmit(evt) {
 // ИСПОЛНЕНИЕ КОДА
 //
 
-editButton.addEventListener("click", function () {
-  openPopup(popupEditProfile);
-}); // вызов действия при клике на кнопку редактирования профиля
+editButton.addEventListener("click", () => openPopup(popupEditProfile)); // вызов действия при клике на кнопку редактирования профиля
 
-addPhoto.addEventListener("click", function () {
-  openPopup(popupAddPhoto);
-}); // вызов действия при клике на кнопку добавления фото
+addPhoto.addEventListener("click", () => openPopup(popupAddPhoto)); // вызов действия при клике на кнопку добавления фото
 
-closeButtonEditProfile.addEventListener("click", function () {
-  closePopup(popupEditProfile);
-}); // вызов действия при клике на закрытие формы редактирования профиля
+closeButtonEditProfile.addEventListener("click", () =>
+  closePopup(popupEditProfile)
+); // вызов действия при клике на закрытие формы редактирования профиля
 
-closeButtonAddPhoto.addEventListener("click", function () {
-  closePopup(popupAddPhoto);
-}); // вызов действия при клике на закрытие формы добавления фото
+closeButtonAddPhoto.addEventListener("click", () => closePopup(popupAddPhoto)); // вызов действия при клике на закрытие формы добавления фото
 
 fillInpytValue(inputAuthorName, authorName); // вызов функции для заполнения input.value в форме редактирования профиля пользователя для поля "Имя Фамилия"
 
