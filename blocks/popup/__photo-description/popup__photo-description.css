@@ -1,0 +1,12 @@
+.popup__photo-description {
+  color: #fff;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  padding-top: 10px;
+  width: 100%;
+  max-width: 75vw;
+  text-align: start;
+}
