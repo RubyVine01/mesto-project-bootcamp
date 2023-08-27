@@ -67,8 +67,8 @@ function handleFormSubmit(evt) {
   evt.preventDefault();
   let nameInputValue = inputAuthorName.value;
   let jobInputValue = inputAboutAuthor.value;
-  authorName.innerHTML = nameInputValue;
-  aboutAuthor.innerHTML = jobInputValue;
+  authorName.textContent = nameInputValue;
+  aboutAuthor.textContent = jobInputValue;
 
   closePopup();
 }
@@ -79,7 +79,6 @@ function addPhotoCard (imageName, imageLink) {
   const photoCard= photoCardTemplate .querySelector('.photo-item').cloneNode(true);
   photoCard.querySelector('.photo-item__discription').textContent = imageName;
   photoCard.querySelector('.photo-item__photo').src = imageLink;
-  photoCard.querySelector('.photo-item__photo').alt = imageName;
 
   cardContainer.append(photoCard);
 };
