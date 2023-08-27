@@ -136,7 +136,9 @@
       <footer class="footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
       </footer>
-      <div class="popup">
+
+
+      <div class="popup" id="popup-edit-profile">
         <!--popup_opened - класс для включения стилей видимости popup-->
         <div class="popup__conteiner">
           <button
@@ -166,15 +168,45 @@
           </form>
         </div>
       </div>
+
+
+      <div class="popup" id="popup-add-photo">
+        <!--popup_opened - класс для включения стилей видимости popup-->
+        <div class="popup__conteiner">
+          <button
+            type="button"
+            class="popup__button-close"
+            aria-label="Закрыть форму добавления фото"
+          ></button>
+          <form class="popup__form">
+            <h2 class="popup__title">Новое место</h2>
+            <fieldset class="popup__input-conteiner">
+              <input
+                id="input-photo-name"
+                type="text"
+                class="popup__input-text"
+                placeholder="Название"
+                required
+              />
+              <input
+                id="input-photo-link"
+                type="url"
+                class="popup__input-text"
+                placeholder="Ссылка на картинку"
+                required
+              />
+            </fieldset>
+            <button type="submit" class="popup__button-save">Создать</button>
+          </form>
+        </div>
+      </div>
     </div>
+
+
     
     <template id="foto-card">
       <li class="photo-item">
-        <img
-          src=""
-          alt=""
-          class="photo-item__photo"
-        />
+        <img src="" alt="" class="photo-item__photo" />
         <div class="photo-item__action-title">
           <h2 class="photo-item__discription"></h2>
           <button

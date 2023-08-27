@@ -25,8 +25,9 @@ const initialCards = [
   },
 ];
 
-
 const editButton = document.querySelector(".profile__edit-button"); // кнопка редактирования профиля
+
+const addPhoto = document.querySelector(".profile__add-button"); // кнопка добавления нового фото
 
 const authorName = document.querySelector(".profile__author-name"); // текстовый элемент с именем профиля
 
@@ -34,7 +35,13 @@ const aboutAuthor = document.querySelector(".profile__about-author"); // тек�
 
 const popup = document.querySelector(".popup"); // popup
 
-const closeButton = popup.querySelector(".popup__button-close"); // кнопка закрытия popup
+const popupEditProfile = document.getElementById("popup-edit-profile"); // popup редактирования профиля
+
+const popupAddPhoto = document.getElementById("popup-add-photo"); // popup добавления нового фото
+
+const closeButton = document.querySelector(".popup__button-close"); // кнопка закрытия popup
+
+console.log(closeButton)
 
 const formElement = popup.querySelector(".popup__form");
 
@@ -42,8 +49,7 @@ const inputAuthorName = document.getElementById("input-name"); // поле вв�
 
 const inputAboutAuthor = document.getElementById("input-about-author"); // поле ввода информации о себе в форме редактирования профиля
 
-const cardContainer = document.querySelector('.photo-place__list') // список с фото-карточками
-
+const cardContainer = document.querySelector(".photo-place__list"); // список с фото-карточками
 
 // функция открытия popup
 function openPopup() {
@@ -74,20 +80,24 @@ function handleFormSubmit(evt) {
 }
 
 // функция добавляет карточку с фотографией при вызове
-function addPhotoCard (imageName, imageLink) {
-  const photoCardTemplate = document.querySelector('#foto-card').content;
-  const photoCard= photoCardTemplate .querySelector('.photo-item').cloneNode(true);
-  photoCard.querySelector('.photo-item__discription').textContent = imageName;
-  photoCard.querySelector('.photo-item__photo').src = imageLink;
+function addPhotoCard(imageName, imageLink) {
+  const photoCardTemplate = document.querySelector("#foto-card").content;
+  const photoCard = photoCardTemplate
+    .querySelector(".photo-item")
+    .cloneNode(true);
+  photoCard.querySelector(".photo-item__discription").textContent = imageName;
+  photoCard.querySelector(".photo-item__photo").src = imageLink;
 
   cardContainer.append(photoCard);
-};
-
-
-
-
+}
 
 editButton.addEventListener("click", openPopup); // вызов действия при клике на кнопку редактирования профиля
+
+//addPhoto.addEventListener("click", openPopup); // вызов действия при клике на кнопку редактирования профиля
+
+addPhoto.addEventListener("click", function () {
+  popupAddPhoto.classList.add("popup_opened");
+}); // вызов действия при клике на кнопку редактирования профиля
 
 closeButton.addEventListener("click", closePopup); // вызов действия при клике на кнопку закрытия popup, действует для всех popup
 
@@ -99,5 +109,9 @@ formElement.addEventListener("submit", handleFormSubmit); //сохраняет �
 
 //перебирает значения в массиве и добавляет новые карточки
 for (let initialCard of initialCards) {
-  addPhotoCard(initialCard.name, initialCard.link )
+  addPhotoCard(initialCard.name, initialCard.link);
 }
+
+
+
+
