@@ -100,24 +100,17 @@ function handleProfileFormSubmit(evt) {
 }
 
 
+function createCard(imageName, imageLink) {
 
-
-// функция добавляет карточку с фотографией при вызове
-function addPhotoCard(imageName, imageLink) {
- 
- 
-  //*
   const photoCardTemplate = document.getElementById("photo-card").content; //контент шаблона карточки
 
   const photoCard = photoCardTemplate
     .querySelector(".photo-item")
     .cloneNode(true); // карточкуа со всем содержимым
 
-   const photoLike = photoCard.querySelector(".photo-item__like"); // кнопка "нравитяся"
+  const photoLike = photoCard.querySelector(".photo-item__like"); // кнопка "нравитяся"
 
   const photoDelete = photoCard.querySelector(".photo-item__delete"); // кнопка удалить
-//***
-
 
   const popupViewPhoto = document.getElementById("popup-view-photo"); //попап просмотра фото
 
@@ -160,8 +153,16 @@ function addPhotoCard(imageName, imageLink) {
     closePopup(popupViewPhoto)
   );
 
+  return photoCard
+}
+
+console.log(createCard())
+
+// функция добавляет карточку с фотографией при вызове
+function addPhotoCard(imageName, imageLink) {
+ 
   //создает карточку с фото
-  cardContainer.prepend(photoCard);
+  cardContainer.prepend(createCard(imageName, imageLink));
 }
 
 
