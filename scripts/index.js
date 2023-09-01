@@ -54,6 +54,11 @@ const addPhoto = document.querySelector(".profile__add-button"); // кнопка
 
 const popupAddPhoto = document.getElementById("popup-add-photo"); // popup добавления нового фото
 
+const popupViewPhoto = document.getElementById("popup-view-photo");  ///???Пока строка дублируется
+
+const popupPhotoImage = popupViewPhoto.querySelector(".popup__photo-image")
+const popupPhotoDescription =  popupViewPhoto.querySelector(".popup__photo-description") 
+
 const closeButtonAddPhoto = popupAddPhoto.querySelector(".popup__button-close"); // кнопка закрытия popup добавления фото
 
 const formAddPhoto = popupAddPhoto.querySelector(".popup__form"); // форма в popup
@@ -76,32 +81,40 @@ function closePopup(popupName) {
 //функция заполнения input.value в форме полученными значениями
 
 function fillInpytValue(inputName, content) {
-  let contentValue = content.innerText; // получает текстовое значение
+  const contentValue = content.innerText; // получает текстовое значение
   inputName.setAttribute("value", contentValue); // вставляет его в input.value
 }
 
 // Сохранение отредактированных в форме значений имени и информации о себе
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  let nameInputValue = inputAuthorName.value;
-  let jobInputValue = inputAboutAuthor.value;
+  const nameInputValue = inputAuthorName.value;
+  const jobInputValue = inputAboutAuthor.value;
   authorName.textContent = nameInputValue;
   aboutAuthor.textContent = jobInputValue;
 
   closePopup(popupEditProfile);
 }
 
+
+
+
 // функция добавляет карточку с фотографией при вызове
 function addPhotoCard(imageName, imageLink) {
-  const photoCardTemplate = document.querySelector("#photo-card").content; //контент шаблона карточки
+ 
+ 
+  //*
+  const photoCardTemplate = document.getElementById("photo-card").content; //контент шаблона карточки
 
   const photoCard = photoCardTemplate
     .querySelector(".photo-item")
     .cloneNode(true); // карточкуа со всем содержимым
 
-  const photoLike = photoCard.querySelector(".photo-item__like"); // кнопка "нравитяся"
+   const photoLike = photoCard.querySelector(".photo-item__like"); // кнопка "нравитяся"
 
   const photoDelete = photoCard.querySelector(".photo-item__delete"); // кнопка удалить
+//***
+
 
   const popupViewPhoto = document.getElementById("popup-view-photo"); //попап просмотра фото
 
@@ -115,6 +128,10 @@ function addPhotoCard(imageName, imageLink) {
 
   photoCard.querySelector(".photo-item__photo").src = imageLink; //присваивание изображения карточке
 
+  photoCard.querySelector(".photo-item__photo").alt = imageName;
+
+
+  //*
   //позволяет активировать и деактивировать кнопку "нравится"
   photoLike.addEventListener("click", (evt) =>
     evt.target.classList.toggle("photo-item__like-active")
@@ -122,12 +139,14 @@ function addPhotoCard(imageName, imageLink) {
 
   //удаляет карточку с фото
   photoDelete.addEventListener("click", () => photoCard.remove());
+//*** 
+
 
   // открывает модальное окно просмотра фото
   photoView.addEventListener("click", () => {
-    popupViewPhoto.querySelector(".popup__photo-image").src = imageLink; //присваивание изображения попапу просмотра
-    popupViewPhoto.querySelector(".popup__photo-description").textContent =
-      imageName; //присваивание подписи к изображению попапу просмотра
+    popupPhotoImage.src = imageLink; //присваивание изображения попапу просмотра
+    popupPhotoImage.alt = imageName ;
+    popupPhotoDescription.textContent = imageName; //присваивание подписи к изображению попапу просмотра
 
     // открытие попапа просмотра изображения
     openPopup(popupViewPhoto);
@@ -141,6 +160,11 @@ function addPhotoCard(imageName, imageLink) {
   //создает карточку с фото
   cardContainer.prepend(photoCard);
 }
+
+
+
+
+
 
 // Создание новой карточки через форму добавления фото
 function handlePhotoFormSubmit(evt) {
@@ -172,6 +196,8 @@ fillInpytValue(inputAboutAuthor, aboutAuthor); // вызов функции дл
 
 formEditProfile.addEventListener("submit", handleProfileFormSubmit); //сохраняет значения введенные в форму редактирования профиля
 
+
+// ? определиться нужно ли исправлять let
 //перебирает значения в массиве и добавляет новые карточки
 for (let initialCard of initialCards) {
   addPhotoCard(initialCard.name, initialCard.link);
