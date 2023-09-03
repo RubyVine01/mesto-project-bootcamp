@@ -1,8 +1,19 @@
 import "./styles/index.css";
 
 import createCard from "./components/card.js";
+
+import enableValidation from "./components/validate.js";
 // ПЕРЕМЕННЫЕ
 //
+
+const validationSettings = {
+  inputSelector: '.popup__input-text',
+  buttonSelector: '.popup__button-save',
+  formSelector: '.popup__form',
+  invalidTextClass: 'popup__input-text_invalid',
+ }
+
+enableValidation(validationSettings)
 
 const initialCards = [
   {
