@@ -23,7 +23,9 @@ https://rubyvine01.github.io/mesto-project-bootcamp/
 - Типографика
 - [Figma](https://www.figma.com/)
 - Диалоговые окна
+- Webpack
+
+
 
 ## To do
-- [ ] Добавить валидацию полей в формах с помощью Java Script.
 - [ ] Настроить работу с сервером.
