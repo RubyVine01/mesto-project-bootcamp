@@ -1,20 +1,22 @@
-import "./styles/index.css";
+//ИМПОРТ
+//
+import "./styles/index.css"; // импорт стилей
 
-import createCard from "./components/card.js";
+import createCard from "./components/card.js"; // импорт функции создания карточек
 
-import enableValidation from "./components/validate.js";
+import {
+  openPopup,
+  closePopup,
+  closeOverlay,
+  closeEscape,
+} from "./components/modal.js"; //импорт функций работы с модальными окнами
+
+import enableValidation from "./components/validate.js"; //импорт функции валидации форм
+
 // ПЕРЕМЕННЫЕ
 //
 
-const validationSettings = {
-  inputSelector: '.popup__input-text',
-  buttonSelector: '.popup__button-save',
-  formSelector: '.popup__form',
-  invalidTextClass: 'popup__input-text_invalid',
- }
-
-enableValidation(validationSettings)
-
+// массив изображений для создания карточек
 const initialCards = [
   {
     name: "Архыз",
@@ -42,47 +44,60 @@ const initialCards = [
   },
 ];
 
-// РЕДАКТИРОВАНИЕ ПРОФИЛЯ
+// настройки для валидации форм
+const validationSettings = {
+  inputSelector: ".popup__input-text",
+  buttonSelector: ".popup__button-save",
+  formSelector: ".popup__form",
+  invalidTextClass: "popup__input-text_invalid",
+};
 
+// настройки для создания карточки с фотографией
+const cardSettings = {
+  templateId: "photo-card",
+  cardSelector: ".photo-item",
+  likeSelector: ".photo-item__like",
+  deleteSelector: ".photo-item__delete",
+  cardPhotoSelector: ".photo-item__photo",
+  photoDiscriptionSelector: ".photo-item__discription",
+  popupPhotoId: "popup-view-photo",
+  likeActiveClass: "photo-item__like-active",
+};
+
+// профиль пользователя
 const editButton = document.querySelector(".profile__edit-button"); // кнопка редактирования профиля
-
 const authorName = document.querySelector(".profile__author-name"); // текстовый элемент с именем профиля
-
 const aboutAuthor = document.querySelector(".profile__about-author"); // текстовый элемент с информацией "О себе"
 
+// попап редактирования профиля пользователя
 const popupEditProfile = document.getElementById("popup-edit-profile"); // popup редактирования профиля
-
 const inputAuthorName = document.getElementById("input-name"); // поле ввода имени в форме редактирования профиля
-
 const inputAboutAuthor = document.getElementById("input-about-author"); // поле ввода информации о себе в форме редактирования профиля
-
 const formEditProfile = popupEditProfile.querySelector(".popup__form"); // форма в popup
 
-// ДОБАВЛЕНИЕ ФОТО
-
+// попап создания новой карточки с фото
 const addPhoto = document.querySelector(".profile__add-button"); // кнопка добавления нового фото
-
 const popupAddPhoto = document.getElementById("popup-add-photo"); // popup добавления нового фото
-
 const formAddPhoto = popupAddPhoto.querySelector(".popup__form"); // форма в popup
 
+// контейнер для карточек с фото
 const cardContainer = document.querySelector(".photo-place__list"); // список с фото-карточками
+
+// попап просмотра изображений
+const popupViewPhoto = document.getElementById("popup-view-photo"); //
+const popupPhotoImage = popupViewPhoto.querySelector(".popup__photo-image");
+const popupPhotoDescription = popupViewPhoto.querySelector(
+  ".popup__photo-description"
+);
+
+// все попапы и кнопки закрытия
+const popupList = document.querySelectorAll(".popup");
+const closeButtons = document.querySelectorAll(".popup__button-close"); //выбирает все закрытия попапа
 
 // ФУНКЦИИ
 //
 
-// функция открытия popup
-function openPopup(popupName) {
-  popupName.classList.add("popup_opened");
-}
-
-//функция закрытия popup
-function closePopup(popupName) {
-  popupName.classList.remove("popup_opened");
-}
-
 //функция заполнения input.value в форме полученными значениями
-
 function fillInpytValue(inputName, content) {
   const contentValue = content.innerText; // получает текстовое значение
   inputName.setAttribute("value", contentValue); // вставляет его в input.value
@@ -99,25 +114,8 @@ function handleProfileFormSubmit(evt) {
   closePopup(popupEditProfile);
 }
 
-const cardSettings = {
-  templateId: "photo-card",
-  cardSelector: ".photo-item",
-  likeSelector: ".photo-item__like",
-  deleteSelector: ".photo-item__delete",
-  cardPhotoSelector: ".photo-item__photo",
-  photoDiscriptionSelector: ".photo-item__discription",
-  popupPhotoId: "popup-view-photo",
-  likeActiveClass: "photo-item__like-active",
-};
-
-const popupViewPhoto = document.getElementById("popup-view-photo"); //
-const popupPhotoImage = popupViewPhoto.querySelector(".popup__photo-image");
-const popupPhotoDescription = popupViewPhoto.querySelector(
-  ".popup__photo-description"
-);
-
+// открывает модальное окно просмотра фото
 export function openPhotoPopup(photo, imageLink, imageName) {
-  // открывает модальное окно просмотра фото
   photo.addEventListener("click", () => {
     popupPhotoImage.src = imageLink; //присваивание изображения попапу просмотра
     popupPhotoImage.alt = imageName;
@@ -128,7 +126,7 @@ export function openPhotoPopup(photo, imageLink, imageName) {
   });
 }
 
-// функция добавляет карточку с фотографией при вызове в начало
+// добавляет карточку с фотографией при вызове в начало контейнера
 function addPhotoCard(imageName, imageLink) {
   //создает карточку с фото
   cardContainer.prepend(createCard(imageName, imageLink, cardSettings));
@@ -144,7 +142,7 @@ function handlePhotoFormSubmit(evt) {
   formAddPhoto.reset();
 }
 
-const closeButtons = document.querySelectorAll(".popup__button-close"); //выбирает все закрытия попапа
+// ИСПОЛНЕНИЕ КОДА
 
 // перебирает все кнопки  и находим ближайший к крестику попап
 closeButtons.forEach((button) => {
@@ -153,24 +151,32 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup(popup));
 });
 
-// ИСПОЛНЕНИЕ КОДА
-//
+// закрывает попап при нажатии на Escape или клику по Overlay
+popupList.forEach((popup) => {
+  closeEscape(popup);
+  closeOverlay(popup);
+});
 
+// при нажатии кнопку редактировать профиль, открывает попап и заполняет инпуты
 editButton.addEventListener("click", () => {
   openPopup(popupEditProfile);
-  fillInpytValue(inputAuthorName, authorName); // вызов функции для заполнения input.value в форме редактирования профиля пользователя для поля "Имя Фамилия"
-  fillInpytValue(inputAboutAuthor, aboutAuthor); // вызов функции для заполнения input.value в форме редактирования профиля пользователя для поля "О себе"
-}); // вызов действия при клике на кнопку редактирования профиля
+  fillInpytValue(inputAuthorName, authorName); 
+  fillInpytValue(inputAboutAuthor, aboutAuthor); 
+}); 
 
-addPhoto.addEventListener("click", () => openPopup(popupAddPhoto)); // вызов действия при клике на кнопку добавления фото
+// открывает попап добавления фото при нажатии на кнопу
+addPhoto.addEventListener("click", () => openPopup(popupAddPhoto)); 
 
-formEditProfile.addEventListener("submit", handleProfileFormSubmit); //сохраняет значения введенные в форму редактирования профиля
+// сохраняет значения введенные в форму редактирования профиля
+formEditProfile.addEventListener("submit", handleProfileFormSubmit); 
 
-// ? определиться нужно ли исправлять let
-//перебирает значения в массиве и добавляет новые карточки
-for (let initialCard of initialCards) {
-  addPhotoCard(initialCard.name, initialCard.link);
-}
+// перебирает значения в массиве и добавляет новые карточки
+initialCards.forEach(initialCard=>
+  addPhotoCard(initialCard.name, initialCard.link)
+);
 
-//добавляет карточку фото при нажатии на кнопку "Сохранить"
+// добавляет карточку фото при нажатии на кнопку "Сохранить"
 formAddPhoto.addEventListener("submit", handlePhotoFormSubmit);
+ 
+// включает валидацию полей форм
+enableValidation(validationSettings); 
