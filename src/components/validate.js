@@ -57,9 +57,11 @@ function setEventListeners(formElement, settings) {
 }
 
 // функция проверяет валидации
-export default function enableValidation(settings) {
+function enableValidation(settings) {
   const formList = document.querySelectorAll(settings.formSelector);
   formList.forEach((formElement) => {
     setEventListeners(formElement, settings);
   });
 }
+
+export { enableValidation, disableButton };
