@@ -8,6 +8,7 @@ import { openPopup, closePopup, closeOverlay } from "./components/modal.js"; //�
 
 import { enableValidation, disableButton } from "./components/validate.js"; //импорт функции валидации форм
 
+import { getProfileInfo, saveProfileInfo } from "./components/api.js";
 // ПЕРЕМЕННЫЕ
 //
 
@@ -106,9 +107,16 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   const nameInputValue = inputAuthorName.value;
   const jobInputValue = inputAboutAuthor.value;
-  authorName.textContent = nameInputValue;
-  aboutAuthor.textContent = jobInputValue;
-  closePopup(popupEditProfile);
+
+  saveProfileInfo(nameInputValue, jobInputValue)
+    .then((res) => {
+      authorName.textContent = res.name;
+      aboutAuthor.textContent = res.about;
+      closePopup(popupEditProfile);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 // открывает модальное окно просмотра фото
@@ -138,6 +146,16 @@ function handlePhotoFormSubmit(evt) {
 }
 
 // ИСПОЛНЕНИЕ КОДА
+
+//получает данные профиля 
+getProfileInfo()
+  .then((res) => {
+    authorName.textContent = res.name;
+    aboutAuthor.textContent = res.about;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 // перебирает все кнопки  и находим ближайший к крестику попап
 closeButtons.forEach((button) => {
