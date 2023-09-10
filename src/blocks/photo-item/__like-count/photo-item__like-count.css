@@ -1,0 +1,9 @@
+.photo-item__like-count {
+  display: block;
+  margin: 0;
+  color: #000;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

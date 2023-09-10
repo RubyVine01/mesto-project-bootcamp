@@ -8,37 +8,17 @@ import { openPopup, closePopup, closeOverlay } from "./components/modal.js"; //�
 
 import { enableValidation, disableButton } from "./components/validate.js"; //импорт функции валидации форм
 
-import { getProfileInfo, saveProfileInfo } from "./components/api.js";
+import {
+  getProfileInfo,
+  saveProfileInfo,
+  getPhotoCard,
+  savePhotoCard,
+  deletePhotoCard,
+} from "./components/api.js";
 // ПЕРЕМЕННЫЕ
 //
 
 // массив изображений для создания карточек
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
 
 // настройки для валидации форм
 const validationSettings = {
@@ -58,6 +38,8 @@ const cardSettings = {
   photoDiscriptionSelector: ".photo-item__discription",
   popupPhotoId: "popup-view-photo",
   likeActiveClass: "photo-item__like-active",
+  profileId: "8cd03160afd9d1eccff608ed",
+  likeCountSelector: ".photo-item__like-count",
 };
 
 // профиль пользователя
@@ -132,26 +114,49 @@ export function openPhotoPopup(photo, imageLink, imageName) {
 }
 
 // добавляет карточку с фотографией при вызове в начало контейнера
-function addPhotoCard(imageName, imageLink) {
+// function addPhotoCard(imageName, imageLink, card) {
+//   //создает карточку с фото
+//   cardContainer.prepend(createCard(imageName, imageLink,  cardSettings, card));
+// }
+function addPhotoCard(newCard) {
   //создает карточку с фото
-  cardContainer.prepend(createCard(imageName, imageLink, cardSettings));
+  cardContainer.prepend(newCard);
 }
 
 // Создание новой карточки через форму добавления фото
 function handlePhotoFormSubmit(evt) {
   evt.preventDefault();
-  addPhotoCard(inputPhotoName.value, inputPhotoLink.value);
-  closePopup(popupAddPhoto);
-  formAddPhoto.reset();
+  savePhotoCard(inputPhotoName.value, inputPhotoLink.value)
+    .then((card) => {
+      const newCard = createCard(card.name, card.link, cardSettings, card);
+      addPhotoCard(newCard);
+      
+      formAddPhoto.reset();
+      closePopup(popupAddPhoto);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 // ИСПОЛНЕНИЕ КОДА
 
-//получает данные профиля 
+//получает данные профиля
 getProfileInfo()
   .then((res) => {
     authorName.textContent = res.name;
     aboutAuthor.textContent = res.about;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+getPhotoCard()
+  .then((res) => {
+    res.forEach((card) => {
+      const newCard = createCard(card.name, card.link, cardSettings, card);
+      addPhotoCard(newCard);
+    });
   })
   .catch((err) => {
     console.log(err);
@@ -184,11 +189,6 @@ addPhoto.addEventListener("click", () => {
 
 // сохраняет значения введенные в форму редактирования профиля
 formEditProfile.addEventListener("submit", handleProfileFormSubmit);
-
-// перебирает значения в массиве и добавляет новые карточки
-initialCards.forEach((initialCard) =>
-  addPhotoCard(initialCard.name, initialCard.link)
-);
 
 // добавляет карточку фото при нажатии на кнопку "Сохранить"
 formAddPhoto.addEventListener("submit", handlePhotoFormSubmit);

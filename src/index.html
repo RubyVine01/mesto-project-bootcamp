@@ -108,7 +108,9 @@
                 required
                 minlength="2"
                 maxlength="30"
+                
               />
+              <!--autocomplete="one-time-code"-->
               <span
                 class="popup__error-message"
                 id="error-input-photo-name"
@@ -160,11 +162,14 @@
         <img src="" alt="" class="photo-item__photo" />
         <div class="photo-item__action-title">
           <h2 class="photo-item__discription"></h2>
-          <button
-            type="button"
-            class="photo-item__like"
-            aria-label="Поставить отметку нравиться"
-          ></button>
+          <div class="photo-item__like-conteiner">
+            <button
+              type="button"
+              class="photo-item__like"
+              aria-label="Поставить отметку нравиться"
+            ></button>
+            <span class="photo-item__like-count"></span>
+          </div>
         </div>
       </li>
     </template>

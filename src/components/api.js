@@ -19,7 +19,6 @@ const getProfileInfo = () => {
   );
 };
 
-
 const saveProfileInfo = (name, about) => {
   return fetch(`${config.baseUrl}/users/me`, {
     method: "PATCH",
@@ -31,6 +30,53 @@ const saveProfileInfo = (name, about) => {
   }).then(checkResponse);
 };
 
-export { getProfileInfo, saveProfileInfo };
+const getPhotoCard = () => {
+  return fetch(`${config.baseUrl}/cards`, { headers: config.headers }).then(
+    checkResponse
+  );
+};
 
+const savePhotoCard = (name, link) => {
+  return fetch(`${config.baseUrl}/cards`, {
+    method: "POST",
+    headers: config.headers,
+    body: JSON.stringify({
+      name: name,
+      link: link,
+    }),
+  }).then(checkResponse);
+};
+
+const deletePhotoCard = (id) => {
+  return fetch(`${config.baseUrl}/cards/${id}`, {
+    method: "DELETE",
+    headers: config.headers,
+  }).then(checkResponse);
+};
+
+
+const addLike = (id) => {
+  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
+    method: "PUT",
+    headers: config.headers,
+  }).then(checkResponse);
+};
+
+const deleteLike = (id) => {
+  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
+    method: "DELETE",
+    headers: config.headers,
+  }).then(checkResponse);
+};
+
+export {
+  getProfileInfo,
+  saveProfileInfo,
+  getPhotoCard,
+  savePhotoCard,
+  deletePhotoCard,
+  addLike,
+  deleteLike,
+
+};
 
