@@ -114,13 +114,9 @@ export function openPhotoPopup(photo, imageLink, imageName) {
 }
 
 // добавляет карточку с фотографией при вызове в начало контейнера
-// function addPhotoCard(imageName, imageLink, card) {
-//   //создает карточку с фото
-//   cardContainer.prepend(createCard(imageName, imageLink,  cardSettings, card));
-// }
 function addPhotoCard(newCard) {
   //создает карточку с фото
-  cardContainer.prepend(newCard);
+  cardContainer.append(newCard);
 }
 
 // Создание новой карточки через форму добавления фото

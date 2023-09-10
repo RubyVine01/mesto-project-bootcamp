@@ -14,7 +14,6 @@ export default function createCard(imageName, imageLink, settings, card) {
 
   const likeCount = card.likes.length;
 
- 
   const checkLike = () => {
     const likeList = card.likes;
     likeList.forEach((like) => {
@@ -28,18 +27,17 @@ export default function createCard(imageName, imageLink, settings, card) {
     });
   };
 
-
-  const countLike = () => {
+  const countLike = (likeCount) => {
     if (likeCount > 0) {
+      //likeCountEl.add();
       likeCountEl.textContent = likeCount;
-      checkLike()
+      checkLike();
     } else {
-      likeCountEl.remove();
+      likeCountEl.textContent = "";
     }
   };
 
-  countLike();
-
+  countLike(likeCount);
 
   const deleteCard = photoCard.querySelector(settings.deleteSelector); // кнопка удалить
 
@@ -69,28 +67,30 @@ export default function createCard(imageName, imageLink, settings, card) {
 
   photo.alt = imageName; //присваивание альтернотивного текста изображению
 
-
-
-  // //позволяет активировать и деактивировать кнопку "нравится"
-  // likePhoto.addEventListener("click", (evt) => {
-  //   if (!likePhoto.classList.contains("photo-item__like-active")) {
-  //     addLike(card._id)
-  //       .then(() => {
-  //         evt.target.classList.add(settings.likeActiveClass);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   } else {
-  //     deleteLike(card._id)
-  //       .then(() => {
-  //         evt.target.classList.remove(settings.likeActiveClass);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   }
-  // });
+  //позволяет активировать и деактивировать кнопку "нравится"
+  likePhoto.addEventListener("click", (evt) => {
+    if (!likePhoto.classList.contains("photo-item__like-active")) {
+      addLike(card._id)
+        .then((res) => {
+          const likeCount = res.likes.length;
+          countLike(likeCount);
+          evt.target.classList.add(settings.likeActiveClass);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      deleteLike(card._id)
+        .then((res) => {
+          const likeCount = res.likes.length;
+          countLike(likeCount);
+          evt.target.classList.remove(settings.likeActiveClass);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  });
 
   //открывает Popup при нажатии на картинку
   openPhotoPopup(photo, imageLink, imageName);
