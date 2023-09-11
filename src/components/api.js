@@ -69,6 +69,17 @@ const deleteLike = (id) => {
   }).then(checkResponse);
 };
 
+
+const addAuthorAvatar = (avatar) => {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
+    method: "PATCH",
+    headers: config.headers,
+    body: JSON.stringify({
+      avatar: avatar,
+    }),
+  }).then(checkResponse);
+};
+
 export {
   getProfileInfo,
   saveProfileInfo,
@@ -77,6 +88,6 @@ export {
   deletePhotoCard,
   addLike,
   deleteLike,
-
+  addAuthorAvatar
 };
 

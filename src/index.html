@@ -19,11 +19,14 @@
       <main class="content">
         <!--секция profile-->
         <section class="profile">
-          <img
-            src="<%=require('./images/profile-avatar.webp')%>"
-            alt="Фотография владельца профиля"
-            class="profile__avatar"
-          />
+          <div class="profile__avatar-container">
+            <img
+              src=""
+              alt="Фотография владельца профиля"
+              class="profile__avatar"
+            />
+            <button class="profile__edit-avatar-button" type="button"></button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__author-name"></h1>
             <button
@@ -89,6 +92,36 @@
           </form>
         </div>
       </div>
+      <!--popup - изменения аватара-->
+      <div class="popup" id="popup-edit-avatar">
+        <!--popup_opened - класс для включения стилей видимости popup-->
+        <div class="popup__conteiner">
+          <button
+            type="button"
+            class="popup__button-close"
+            aria-label="Закрыть форму изменения аватара"
+          ></button>
+          <form class="popup__form">
+            <h2 class="popup__title">Обновить аватар</h2>
+            <div class="popup__input-conteiner">
+              <input
+                id="input-avatar-link"
+                type="url"
+                class="popup__input-text"
+                placeholder="Ссылка на автара"
+                required
+              />
+              <span
+                class="popup__error-message"
+                id="error-input-avatar-link"
+              ></span>
+            </div>
+            <button id="submit" type="submit" class="popup__button-save">
+              Сохранить
+            </button>
+          </form>
+        </div>
+      </div>
       <!--popup - форма добавления фото-->
       <div class="popup" id="popup-add-photo">
         <div class="popup__conteiner">
@@ -108,9 +141,8 @@
                 required
                 minlength="2"
                 maxlength="30"
-                
+                autocomplete="one-time-code"
               />
-              <!--autocomplete="one-time-code"-->
               <span
                 class="popup__error-message"
                 id="error-input-photo-name"
@@ -121,6 +153,7 @@
                 class="popup__input-text"
                 placeholder="Ссылка на картинку"
                 required
+                autocomplete="one-time-code"
               />
               <span
                 class="popup__error-message"
@@ -139,7 +172,6 @@
       </div>
       <!--popup просмотра изображения-->
       <div class="popup popup_view-photo" id="popup-view-photo">
-        <!--popup_opened - класс для включения стилей видимости popup-->
         <div class="popup__photo-conteiner">
           <img src="" alt="" class="popup__photo-image" />
           <figcaption class="popup__photo-description"></figcaption>

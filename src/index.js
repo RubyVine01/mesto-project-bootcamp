@@ -13,39 +13,25 @@ import {
   saveProfileInfo,
   getPhotoCard,
   savePhotoCard,
-  deletePhotoCard,
+  addAuthorAvatar,
 } from "./components/api.js";
+
+import { validationSettings, cardSettings } from "./components/const.js";
+
 // ПЕРЕМЕННЫЕ
 //
 
-// массив изображений для создания карточек
-
-// настройки для валидации форм
-const validationSettings = {
-  inputSelector: ".popup__input-text",
-  buttonSelector: ".popup__button-save",
-  formSelector: ".popup__form",
-  invalidTextClass: "popup__input-text_invalid",
-};
-
-// настройки для создания карточки с фотографией
-const cardSettings = {
-  templateId: "photo-card",
-  cardSelector: ".photo-item",
-  likeSelector: ".photo-item__like",
-  deleteSelector: ".photo-item__delete",
-  cardPhotoSelector: ".photo-item__photo",
-  photoDiscriptionSelector: ".photo-item__discription",
-  popupPhotoId: "popup-view-photo",
-  likeActiveClass: "photo-item__like-active",
-  profileId: "8cd03160afd9d1eccff608ed",
-  likeCountSelector: ".photo-item__like-count",
-};
-
 // профиль пользователя
+const editAvatarButton = document.querySelector(".profile__edit-avatar-button"); // кнопка редактирования аватара
+const profileAvatar = document.querySelector(".profile__avatar"); // аватар пользователя
 const editButton = document.querySelector(".profile__edit-button"); // кнопка редактирования профиля
 const authorName = document.querySelector(".profile__author-name"); // текстовый элемент с именем профиля
 const aboutAuthor = document.querySelector(".profile__about-author"); // текстовый элемент с информацией "О себе"
+
+// попап редактирования аватара
+const popupEditAvatar = document.getElementById("popup-edit-avatar"); // popup редактирования аватара
+const inputAvatarLink = document.getElementById("input-avatar-link"); // поле ввода ссылки в форме редактирования аватара
+const formEditAvatar = popupEditAvatar.querySelector(".popup__form"); // форма в popup
 
 // попап редактирования профиля пользователя
 const popupEditProfile = document.getElementById("popup-edit-profile"); // popup редактирования профиля
@@ -77,11 +63,24 @@ const closeButtons = document.querySelectorAll(".popup__button-close"); //выб
 
 // ФУНКЦИИ
 //
-
 //функция заполнения input.value в форме полученными значениями
 function fillInpytValue(inputName, content) {
   const contentValue = content.innerText; // получает текстовое значение
   inputName.setAttribute("value", contentValue); // вставляет его в input.value
+}
+
+//отправка ссылки на аватар на сервер
+function handleAvatarFormSubmit(evt) {
+  evt.preventDefault();
+  addAuthorAvatar(inputAvatarLink.value)
+    .then((res) => {
+      profileAvatar.src = res.avatar;
+      formEditAvatar.reset();
+      closePopup(popupEditAvatar);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 // Сохранение отредактированных в форме значений имени и информации о себе
@@ -126,7 +125,7 @@ function handlePhotoFormSubmit(evt) {
     .then((card) => {
       const newCard = createCard(card.name, card.link, cardSettings, card);
       addPhotoCard(newCard);
-      
+
       formAddPhoto.reset();
       closePopup(popupAddPhoto);
     })
@@ -142,11 +141,13 @@ getProfileInfo()
   .then((res) => {
     authorName.textContent = res.name;
     aboutAuthor.textContent = res.about;
+    profileAvatar.src = res.avatar;
   })
   .catch((err) => {
     console.log(err);
   });
 
+//получает список карточек с сервера
 getPhotoCard()
   .then((res) => {
     res.forEach((card) => {
@@ -191,3 +192,9 @@ formAddPhoto.addEventListener("submit", handlePhotoFormSubmit);
 
 // включает валидацию полей форм
 enableValidation(validationSettings);
+
+// открывает попап изменения аватара
+editAvatarButton.addEventListener("click", () => openPopup(popupEditAvatar));
+
+// отправляет данные об аватаре и заменяет изображение
+formEditAvatar.addEventListener("submit", handleAvatarFormSubmit);
