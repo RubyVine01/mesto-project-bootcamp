@@ -1,3 +1,4 @@
+// в зависимости от условий добавляет или убирает признак загрузки(...)
 function waitingSave(loading, button) {
     const buttonText = button.textContent.replace(/[\s.,%]/g, '');
     const waitingText =`${buttonText} ...`

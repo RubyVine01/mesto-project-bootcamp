@@ -17,15 +17,22 @@ https://rubyvine01.github.io/mesto-project-bootcamp/
     - [Flex](https://developer.mozilla.org/en-US/docs/Web/CSS/flex)
     - [Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout)
     - Адаптивная верстка
+    - Псевдоклассы
+    - Анимация
 - Java Script
+  - API
+  - Модули
+  - Модальные окна
+  - Массивы
 - Git: работа с ветками
 - [БЭМ](https://ru.bem.info/)
 - Типографика
 - [Figma](https://www.figma.com/)
-- Диалоговые окна
 - Webpack
 
 
 
 ## To do
-- [ ] Настроить работу с сервером.
+
+- [ ] Провести анализ UI
+

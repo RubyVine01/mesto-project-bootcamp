@@ -10,7 +10,7 @@ function checkResponse(res) {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(`Ошибка: ${er.status}`);
+  return Promise.reject(`Ошибка: ${res.status}`);
 }
 
 const getProfileInfo = () => {
@@ -54,7 +54,6 @@ const deletePhotoCard = (id) => {
   }).then(checkResponse);
 };
 
-
 const addLike = (id) => {
   return fetch(`${config.baseUrl}/cards/likes/${id}`, {
     method: "PUT",
@@ -68,7 +67,6 @@ const deleteLike = (id) => {
     headers: config.headers,
   }).then(checkResponse);
 };
-
 
 const addAuthorAvatar = (avatar) => {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
@@ -88,6 +86,5 @@ export {
   deletePhotoCard,
   addLike,
   deleteLike,
-  addAuthorAvatar
+  addAuthorAvatar,
 };
-
