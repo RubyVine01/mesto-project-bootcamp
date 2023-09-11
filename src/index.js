@@ -17,6 +17,7 @@ import {
 } from "./components/api.js";
 
 import { validationSettings, cardSettings } from "./components/const.js";
+import { waitingSave } from "./components/utils.js";
 
 // ПЕРЕМЕННЫЕ
 //
@@ -88,13 +89,14 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   const nameInputValue = inputAuthorName.value;
   const jobInputValue = inputAboutAuthor.value;
-
+  waitingSave(true, evt.submitter)
   saveProfileInfo(nameInputValue, jobInputValue)
     .then((res) => {
       authorName.textContent = res.name;
       aboutAuthor.textContent = res.about;
       closePopup(popupEditProfile);
     })
+    .then(() => { waitingSave(false, evt.submitter) })
     .catch((err) => {
       console.log(err);
     });
@@ -198,3 +200,11 @@ editAvatarButton.addEventListener("click", () => openPopup(popupEditAvatar));
 
 // отправляет данные об аватаре и заменяет изображение
 formEditAvatar.addEventListener("submit", handleAvatarFormSubmit);
+
+
+
+
+
+
+
+
