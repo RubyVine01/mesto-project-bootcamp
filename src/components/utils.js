@@ -1,12 +1,10 @@
 // в зависимости от условий добавляет или убирает признак загрузки(...)
-function waitingSave(loading, button) {
-    const buttonText = button.textContent.replace(/[\s.,%]/g, '');
-    const waitingText =`${buttonText} ...`
+function renderLoading(loading, button, buttonText, loadingText) {
     if (loading) {
-      button.textContent = waitingText;
+      button.textContent = loadingText;
     } else {
-      button.textContent = buttonText.replace(/[\s.,%]/g, '');
+      button.textContent = buttonText;
     }
   }
 
-  export {waitingSave}
+  export {renderLoading}

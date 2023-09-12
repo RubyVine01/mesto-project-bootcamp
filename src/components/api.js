@@ -13,69 +13,87 @@ function checkResponse(res) {
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
+function request(urlEnd, options) {
+  const url = `${config.baseUrl}${urlEnd}`;
+  console.log(url);
+  return fetch(url, options).then(checkResponse);
+}
+
 const getProfileInfo = () => {
-  return fetch(`${config.baseUrl}/users/me`, { headers: config.headers }).then(
-    checkResponse
-  );
+  const urlEnd= "/users/me";
+  const options = { headers: config.headers };
+  return request(urlEnd, options);
 };
 
 const saveProfileInfo = (name, about) => {
-  return fetch(`${config.baseUrl}/users/me`, {
+  const urlEnd = "/users/me";
+  const options = {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
       name: name,
       about: about,
     }),
-  }).then(checkResponse);
+  };
+  return request(urlEnd, options);
 };
 
 const getPhotoCard = () => {
-  return fetch(`${config.baseUrl}/cards`, { headers: config.headers }).then(
-    checkResponse
-  );
+  const urlEnd = "/cards";
+  const options = { headers: config.headers };
+  return request(urlEnd, options);
 };
 
 const savePhotoCard = (name, link) => {
-  return fetch(`${config.baseUrl}/cards`, {
+  const urlEnd = "/cards";
+  const options = {
     method: "POST",
     headers: config.headers,
     body: JSON.stringify({
       name: name,
       link: link,
     }),
-  }).then(checkResponse);
+  };
+  return request(urlEnd, options);
 };
 
 const deletePhotoCard = (id) => {
-  return fetch(`${config.baseUrl}/cards/${id}`, {
+  const urlEnd =`/cards/${id}`;
+  const options = {
     method: "DELETE",
     headers: config.headers,
-  }).then(checkResponse);
+  };
+  return request(urlEnd, options);
 };
 
 const addLike = (id) => {
-  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
+  const urlEnd = `/cards/likes/${id}`;
+  const options = {
     method: "PUT",
     headers: config.headers,
-  }).then(checkResponse);
+  };
+  return request(urlEnd, options);
 };
 
 const deleteLike = (id) => {
-  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
+  const urlEnd = `/cards/likes/${id}`;
+  const options = {
     method: "DELETE",
     headers: config.headers,
-  }).then(checkResponse);
+  };
+  return request(urlEnd, options);
 };
 
 const addAuthorAvatar = (avatar) => {
-  return fetch(`${config.baseUrl}/users/me/avatar`, {
+  const urlEnd = "/users/me/avatar";
+  const options = {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
       avatar: avatar,
     }),
-  }).then(checkResponse);
+  };
+  return request(urlEnd, options);
 };
 
 export {
@@ -88,3 +106,4 @@ export {
   deleteLike,
   addAuthorAvatar,
 };
+
