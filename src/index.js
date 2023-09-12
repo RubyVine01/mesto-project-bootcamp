@@ -16,7 +16,12 @@ import {
   addAuthorAvatar,
 } from "./components/api.js";
 
-import { validationSettings, cardSettings } from "./components/const.js";
+import {
+  validationSettings,
+  cardSettings,
+  btnSaveSettings,
+  btnCreateSettings,
+} from "./components/const.js";
 import { renderLoading } from "./components/utils.js";
 
 // ПЕРЕМЕННЫЕ
@@ -51,12 +56,6 @@ const buttonSaveCard = document.querySelector(".save_card");
 // контейнер для карточек с фото
 const cardContainer = document.querySelector(".photo-place__list"); // список с фото-карточками
 
-// попап просмотра изображений
-const popupViewPhoto = document.getElementById("popup-view-photo"); //
-const popupPhotoImage = popupViewPhoto.querySelector(".popup__photo-image");
-const popupPhotoDescription = popupViewPhoto.querySelector(
-  ".popup__photo-description"
-);
 
 // все попапы и кнопки закрытия
 const popupList = document.querySelectorAll(".popup");
@@ -73,6 +72,12 @@ function fillInpytValue(inputName, content) {
 //отправка ссылки на аватар на сервер
 function handleAvatarFormSubmit(evt) {
   evt.preventDefault();
+  renderLoading(
+    true,
+    evt.submitter,
+    btnSaveSettings.buttonText,
+    btnSaveSettings.loadingText
+  );
   addAuthorAvatar(inputAvatarLink.value)
     .then((res) => {
       profileAvatar.src = res.avatar;
@@ -81,6 +86,14 @@ function handleAvatarFormSubmit(evt) {
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      renderLoading(
+        false,
+        evt.submitter,
+        btnSaveSettings.buttonText,
+        btnSaveSettings.loadingText
+      );
     });
 }
 
@@ -89,54 +102,65 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   const nameInputValue = inputAuthorName.value;
   const jobInputValue = inputAboutAuthor.value;
-  const buttonText = "Сохранить";
-  const loadingText = "Сохранение...";
-  renderLoading(true, evt.submitter, buttonText, loadingText);
+  renderLoading(
+    true,
+    evt.submitter,
+    btnSaveSettings.buttonText,
+    btnSaveSettings.loadingText
+  );
   saveProfileInfo(nameInputValue, jobInputValue)
     .then((res) => {
       authorName.textContent = res.name;
       aboutAuthor.textContent = res.about;
       closePopup(popupEditProfile);
     })
-    .then(() => {
-      renderLoading(false, evt.submitter, buttonText, loadingText);
-    })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      renderLoading(
+        false,
+        evt.submitter,
+        btnSaveSettings.buttonText,
+        btnSaveSettings.loadingText
+      );
     });
 }
 
-// открывает модальное окно просмотра фото
-export function openPhotoPopup(photo, imageLink, imageName) {
-  photo.addEventListener("click", () => {
-    popupPhotoImage.src = imageLink; //присваивание изображения попапу просмотра
-    popupPhotoImage.alt = imageName;
-    popupPhotoDescription.textContent = imageName; //присваивание подписи к изображению попапу просмотра
 
-    // открытие попапа просмотра изображения
-    openPopup(popupViewPhoto);
-  });
-}
 
 // добавляет карточку с фотографией при вызове в начало контейнера
 function addPhotoCard(newCard) {
   //создает карточку с фото
-  cardContainer.append(newCard);
+  cardContainer.prepend(newCard);
 }
 
 // Создание новой карточки через форму добавления фото
 function handlePhotoFormSubmit(evt) {
   evt.preventDefault();
+  renderLoading(
+    true,
+    evt.submitter,
+    btnCreateSettings.buttonText,
+    btnCreateSettings.loadingText
+  );
   savePhotoCard(inputPhotoName.value, inputPhotoLink.value)
     .then((card) => {
       const newCard = createCard(card.name, card.link, cardSettings, card);
       addPhotoCard(newCard);
-
       formAddPhoto.reset();
       closePopup(popupAddPhoto);
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      renderLoading(
+        false,
+        evt.submitter,
+        btnSaveSettings.buttonText,
+        btnSaveSettings.loadingText
+      );
     });
 }
 
@@ -156,8 +180,9 @@ getProfileInfo()
 //получает список карточек с сервера
 getPhotoCard()
   .then((res) => {
-    res.forEach((card) => {
-      const newCard = createCard(card.name, card.link, cardSettings, card);
+    res.reverse().forEach((card) => {
+      const newCard = createCard(card.name, card.link, cardSettings, card
+        );
       addPhotoCard(newCard);
     });
   })

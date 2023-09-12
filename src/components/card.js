@@ -1,5 +1,7 @@
-import { openPhotoPopup } from "../index.js"; // экспорт функции открытия попап
 import { deletePhotoCard, addLike, deleteLike } from "../components/api.js";
+
+import { openPhotoPopup } from "../components/modal.js";
+
 
 export default function createCard(imageName, imageLink, settings, card) {
   const cardTemplate = document.getElementById(settings.templateId).content; //контент шаблона карточки
@@ -94,7 +96,7 @@ export default function createCard(imageName, imageLink, settings, card) {
   });
 
   //открывает Popup при нажатии на картинку
-  openPhotoPopup(photo, imageLink, imageName);
+  openPhotoPopup(photo, imageLink, imageName, settings);
 
   return photoCard; // возвращает карточку
 }

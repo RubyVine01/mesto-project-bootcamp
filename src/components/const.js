@@ -18,6 +18,20 @@ const cardSettings = {
   likeActiveClass: "photo-item__like-active",
   profileId: "8cd03160afd9d1eccff608ed",
   likeCountSelector: ".photo-item__like-count",
+  popupPhotoImageSelector: ".popup__photo-image",
+  popupPhotoDescription: ".popup__photo-description",
 };
 
-export { validationSettings, cardSettings };
+
+const btnSaveSettings = {
+  buttonText: "Сохранить",
+  loadingText: "Сохранение...",
+
+};
+
+const btnCreateSettings = {
+  buttonText: "Создать",
+  loadingText: "Создание...",
+};
+
+export { validationSettings, cardSettings, btnSaveSettings, btnCreateSettings };
