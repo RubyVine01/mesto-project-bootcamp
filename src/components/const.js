@@ -22,15 +22,11 @@ const cardSettings = {
   popupPhotoDescription: ".popup__photo-description",
 };
 
-
 const btnSaveSettings = {
-  buttonText: "Сохранить",
   loadingText: "Сохранение...",
-
 };
 
 const btnCreateSettings = {
-  buttonText: "Создать",
   loadingText: "Создание...",
 };
 
