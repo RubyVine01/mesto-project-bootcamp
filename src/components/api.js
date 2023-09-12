@@ -15,12 +15,11 @@ function checkResponse(res) {
 
 function request(urlEnd, options) {
   const url = `${config.baseUrl}${urlEnd}`;
-  console.log(url);
   return fetch(url, options).then(checkResponse);
 }
 
 const getProfileInfo = () => {
-  const urlEnd= "/users/me";
+  const urlEnd = "/users/me";
   const options = { headers: config.headers };
   return request(urlEnd, options);
 };
@@ -58,7 +57,7 @@ const savePhotoCard = (name, link) => {
 };
 
 const deletePhotoCard = (id) => {
-  const urlEnd =`/cards/${id}`;
+  const urlEnd = `/cards/${id}`;
   const options = {
     method: "DELETE",
     headers: config.headers,
@@ -106,4 +105,3 @@ export {
   deleteLike,
   addAuthorAvatar,
 };
-

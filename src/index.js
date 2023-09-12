@@ -1,13 +1,14 @@
 //ИМПОРТ
-//
+
 import "./styles/index.css"; // импорт стилей
 
 import createCard from "./components/card.js"; // импорт функции создания карточек
 
-import { openPopup, closePopup, closeOverlay } from "./components/modal.js"; //импорт функций работы с модальными окнами
+import { openPopup, closePopup } from "./components/modal.js"; //импорт функций работы с модальными окнами
 
 import { enableValidation } from "./components/validate.js"; //импорт функции валидации форм
 
+// Функции API запросов
 import {
   getProfileInfo,
   saveProfileInfo,
@@ -16,6 +17,7 @@ import {
   addAuthorAvatar,
 } from "./components/api.js";
 
+// Функции валидации форм
 import {
   validationSettings,
   cardSettings,
@@ -23,10 +25,10 @@ import {
   btnCreateSettings,
 } from "./components/const.js";
 
+// универсальная функция обработки сабмита
 import { handleSubmit } from "./components/utils.js";
 
 // ПЕРЕМЕННЫЕ
-//
 
 // профиль пользователя
 const editAvatarButton = document.querySelector(".profile__edit-avatar-button"); // кнопка редактирования аватара
@@ -69,8 +71,6 @@ function fillInpytValue(inputName, content) {
   inputName.setAttribute("value", contentValue); // вставляет его в input.value
 }
 
-
-
 //отправка ссылки на аватар на сервер
 function handleAvatarFormSubmit(evt) {
   function makeRequest() {
@@ -97,7 +97,6 @@ function handleProfileFormSubmit(evt) {
   handleSubmit(makeRequest, evt, btnSaveSettings);
 }
 
-
 // добавляет карточку с фотографией при вызове в начало контейнера
 function addPhotoCard(newCard) {
   //создает карточку с фото
@@ -119,42 +118,35 @@ function handlePhotoFormSubmit(evt) {
   handleSubmit(makeRequest, evt, btnCreateSettings);
 }
 
-
 // ИСПОЛНЕНИЕ КОДА
-
-//получает данные профиля
-getProfileInfo()
-  .then((res) => {
-    authorName.textContent = res.name;
-    aboutAuthor.textContent = res.about;
-    profileAvatar.src = res.avatar;
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-//получает список карточек с сервера
-getPhotoCard()
-  .then((res) => {
-    res.reverse().forEach((card) => {
+// получает данные профиля и список карточек с сервера
+Promise.all([getProfileInfo(), getPhotoCard()])
+  .then(([userData, cards]) => {
+    // установка данных пользователя
+    authorName.textContent = userData.name;
+    aboutAuthor.textContent = userData.about;
+    profileAvatar.src = userData.avatar;
+    // отрисовка карточек
+    cards.reverse().forEach((card) => {
       const newCard = createCard(card.name, card.link, cardSettings, card);
       addPhotoCard(newCard);
     });
   })
   .catch((err) => {
-    console.log(err);
+    // ловим ошибку
+    console.error;
   });
 
-// перебирает все кнопки  и находим ближайший к крестику попап
-closeButtons.forEach((button) => {
-  const popup = button.closest(".popup");
-  // устанавливаем обработчик закрытия на крестик
-  button.addEventListener("click", () => closePopup(popup));
-});
-
-// закрывает попап при нажатии на Escape или клику по Overlay
+// закрывает попапы
 popupList.forEach((popup) => {
-  closeOverlay(popup);
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("popup_opened")) {
+      closePopup(popup);
+    }
+    if (evt.target.classList.contains("popup__button-close")) {
+      closePopup(popup);
+    }
+  });
 });
 
 // при нажатии кнопку редактировать профиль, открывает попап и заполняет инпуты

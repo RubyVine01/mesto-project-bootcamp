@@ -10,14 +10,7 @@ function closePopup(popupName) {
   document.removeEventListener("keydown", closeByEscape);
 }
 
-function closeOverlay(popup) {
-  popup.addEventListener("mousedown", (evt) => {
-    if (evt.target === popup) {
-      closePopup(popup);
-    }
-  });
-}
-
+// функция закрытия при нажатии на Escape
 function closeByEscape(evt) {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelector(".popup_opened");
@@ -25,8 +18,9 @@ function closeByEscape(evt) {
   }
 }
 
+//Открытие попапа просмотра фото
 function openPhotoPopup(photo, imageLink, imageName, settings) {
-  // попап просмотра изображений
+  // константы попапа просмотра изображений
   const popupViewPhoto = document.getElementById(settings.popupPhotoId); //
   const popupPhotoImage = popupViewPhoto.querySelector(
     settings.popupPhotoImageSelector
@@ -40,9 +34,9 @@ function openPhotoPopup(photo, imageLink, imageName, settings) {
     popupPhotoImage.alt = imageName;
     popupPhotoDescription.textContent = imageName; //присваивание подписи к изображению попапу просмотра
 
-    // открытие попапа просмотра изображения
+    // открытие попапа
     openPopup(popupViewPhoto);
   });
 }
 
-export { openPopup, closePopup, closeOverlay, openPhotoPopup };
+export { openPopup, closePopup, openPhotoPopup };

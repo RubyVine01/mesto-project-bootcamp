@@ -2,13 +2,12 @@ import { deletePhotoCard, addLike, deleteLike } from "../components/api.js";
 
 import { openPhotoPopup } from "../components/modal.js";
 
-
 export default function createCard(imageName, imageLink, settings, card) {
   const cardTemplate = document.getElementById(settings.templateId).content; //контент шаблона карточки
 
   const photoCard = cardTemplate
     .querySelector(settings.cardSelector)
-    .cloneNode(true); // карточкуа со всем содержимым
+    .cloneNode(true); // карточку со всем содержимым
 
   const likePhoto = photoCard.querySelector(settings.likeSelector); // кнопка "нравится"
 
@@ -53,7 +52,7 @@ export default function createCard(imageName, imageLink, settings, card) {
           photoCard.remove();
         })
         .catch((err) => {
-          console.log(err);
+          console.error;
         });
     });
   }
@@ -80,7 +79,7 @@ export default function createCard(imageName, imageLink, settings, card) {
           evt.target.classList.add(settings.likeActiveClass);
         })
         .catch((err) => {
-          console.log(err);
+          console.error;
         });
     } else {
       deleteLike(card._id)
@@ -90,7 +89,7 @@ export default function createCard(imageName, imageLink, settings, card) {
           evt.target.classList.remove(settings.likeActiveClass);
         })
         .catch((err) => {
-          console.log(err);
+          console.error;
         });
     }
   });
