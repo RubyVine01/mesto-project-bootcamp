@@ -6,7 +6,7 @@ import createCard from "./components/card.js"; // импорт функции с
 
 import { openPopup, closePopup, closeOverlay } from "./components/modal.js"; //импорт функций работы с модальными окнами
 
-import { enableValidation, disableButton } from "./components/validate.js"; //импорт функции валидации форм
+import { enableValidation } from "./components/validate.js"; //импорт функции валидации форм
 
 import {
   getProfileInfo,
@@ -187,7 +187,6 @@ editButton.addEventListener("click", () => {
 // открывает попап добавления фото при нажатии на кнопу
 addPhoto.addEventListener("click", () => {
   openPopup(popupAddPhoto);
-  disableButton(buttonSaveCard);
 });
 
 // сохраняет значения введенные в форму редактирования профиля

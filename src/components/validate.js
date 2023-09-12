@@ -46,6 +46,9 @@ function checkButton(formElement, buttonSubmit) {
 function setEventListeners(formElement, settings) {
   const buttonSubmit = formElement.querySelector(settings.buttonSelector);
   disableButton(buttonSubmit);
+  formElement.addEventListener('reset', () => {
+    disableButton(buttonSubmit);
+  });
   const inputList = formElement.querySelectorAll(settings.inputSelector);
 
   inputList.forEach((input) => {
@@ -64,4 +67,4 @@ function enableValidation(settings) {
   });
 }
 
-export { enableValidation, disableButton };
+export { enableValidation };
