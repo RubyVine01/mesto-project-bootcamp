@@ -76,7 +76,6 @@ function handleAvatarFormSubmit(evt) {
   function makeRequest() {
     return addAuthorAvatar(inputAvatarLink.value).then((res) => {
       profileAvatar.src = res.avatar;
-      formEditAvatar.reset();
       closePopup(popupEditAvatar);
     });
   }
@@ -110,7 +109,6 @@ function handlePhotoFormSubmit(evt) {
       (card) => {
         const newCard = createCard(card.name, card.link, cardSettings, card);
         addPhotoCard(newCard);
-        formAddPhoto.reset();
         closePopup(popupAddPhoto);
       }
     );
